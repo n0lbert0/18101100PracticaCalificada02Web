@@ -1,8 +1,8 @@
 <template>
   <q-page padding>
-    <div class="text-h5 q-mb-md">Digimons</div>
+    <div class="text-h5 q-mb-md">Lista de Digimons</div>
 
-    <!-- Filtros -->
+    
     <div class="row q-col-gutter-md q-mb-lg">
       <div class="col-12 col-md-6">
         <q-input
@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <!-- Grid de Digimons -->
+    
     <div v-if="loading" class="text-center q-mt-xl">
       <q-spinner size="40px" color="primary" />
       <div class="q-mt-md">Cargando Digimons...</div>
@@ -66,13 +66,13 @@ const loading = ref(true)
 const searchName = ref('')
 const searchLevel = ref(null)
 
-// Obtener niveles únicos
+
 const levels = computed(() => {
   const unique = [...new Set(digimons.value.map(d => d.level).filter(Boolean))]
   return unique.sort()
 })
 
-// Filtros reactivos
+
 const filteredDigimons = computed(() => {
   return digimons.value.filter(d => {
     const matchesName = d.name.toLowerCase().includes(searchName.value.toLowerCase())
@@ -81,7 +81,7 @@ const filteredDigimons = computed(() => {
   })
 })
 
-// Cargar datos
+
 onMounted(async () => {
   try {
     const res = await fetch('https://digimon-api.vercel.app/api/digimon')

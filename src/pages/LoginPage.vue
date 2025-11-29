@@ -36,7 +36,7 @@
           />
         </q-form>
 
-        <!-- Mensaje de error -->
+        
         <q-banner
           v-if="error"
           class="bg-red-1 text-red-8 q-mt-md rounded-borders"
@@ -65,21 +65,9 @@ const error = ref('')
 const login = async () => {
   error.value = ''
   loading.value = true
+  
 
-  // Caso especial: credenciales conocidas
-  if (email.value === 'guerrero@peru.com' && password.value === '12345678') {
-    loading.value = false
-    localStorage.setItem('isLoggedIn', 'true')
-    router.push('/digimons')
-    $q.notify({
-      type: 'positive',
-      message: '¡Bienvenido!',
-      timeout: 2000
-    })
-    return
-  }
-
-  // Intentar login con API real
+  // login con API 
   try {
     const res = await fetch('https://storedb-api.onrender.com/node-api/users/signin', {
       method: 'POST',
